@@ -1,0 +1,37 @@
+{% extends 'shopping/basic.html' %}
+
+{% block title%} Title of Tracker{% endblock %}
+{% block body %} This is body {% endblock %}
+
+
+
+{% block js %}
+
+<script >
+	if (localStorage.getItem('cart') == null) {
+		var cart={};
+	}
+	else{
+		cart=JSON.parse(localStorage.getItem('cart'));
+		document.getElementById('cart').innerHTML = Object.keys(cart).length;
+	}
+	$('.cart').click(function() {
+        alert("hhh");
+		var idStr = this.id.toString();
+
+		if(cart[idStr] != undefined){
+		cart[idStr] = cart[idStr] + 1;
+		}
+
+        else{
+    cart[idStr] = 1;
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    document.getElementById('cart').innerHTML = Object.keys(cart).length;
+
+	});
+	$('#popCart').popover();
+	document.getElementById('popCart').setAttribute('data-content', '<h5>Cart</h5>');
+</script>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'shopping/basic.html' %}
+
+{% block title%} Title of About{% endblock %}
+{% block body %}
+
+
+ <div class="container">
+      <h1 class="display-3">RRSrivatava</h1>
+      <p>RRSrivastava.com, Inc.[6] (/rrsrivastva/), is an Indian multinational technology company based in whitefield, Bangalore that focuses on e-commerce, cloud computing, digital streaming and artificial intelligence. It is considered one of the Big Four technology companies along with Google, Apple and Facebook</p>
+      <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+      <div class="col-md-4">
+        <h2>Heading</h2>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+      </div>
+      <div class="col-md-4">
+        <h2>Heading</h2>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+      </div>
+      <div class="col-md-4">
+        <h2>Heading</h2>
+        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+      </div>
+    </div>
+
+    <hr>
+
+  </div> <!-- /container -->
+
+
+{% endblock %}
+
+{% block js %}
+
+<script >
+	if (localStorage.getItem('cart') == null) {
+		var cart={};
+	}
+	else{
+		cart=JSON.parse(localStorage.getItem('cart'));
+		document.getElementById('cart').innerHTML = Object.keys(cart).length;
+	}
+	$('.cart').click(function() {
+        alert("hhh");
+		var idStr = this.id.toString();
+
+		if(cart[idStr] != undefined){
+		cart[idStr] = cart[idStr] + 1;
+		}
+
+        else{
+    cart[idStr] = 1;
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    document.getElementById('cart').innerHTML = Object.keys(cart).length;
+
+	});
+	$('#popCart').popover();
+	document.getElementById('popCart').setAttribute('data-content', '<h5>Cart</h5>');
+</script>
+{% endblock %}

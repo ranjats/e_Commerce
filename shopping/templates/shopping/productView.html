@@ -1,0 +1,58 @@
+{% extends 'shopping/basic.html' %}
+
+
+{% block title%} {{product.product_name}} vIew {% endblock %}
+{% block body %}
+
+<div class="container my-4">
+
+    <div class="row">
+    <div class="col-md-4">
+        <div class="row">
+            <img src="/media/{{product.image}}" width="200px" height="150px">
+        </div>
+        <div class="row">
+            <button class="btn btn-primary mx-2"> Buy Now </button>
+            <button class="btn btn-primary"> Add cart </button>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <h4>{{product.product_name}}</h4>
+        <p><b>Price : </b>{{product.price}}</p>
+        <p>{{product.description}}</p>
+    </div>
+        </div>
+</div>
+{% endblock %}
+
+{% block js %}
+
+<script >
+	if (localStorage.getItem('cart') == null) {
+		var cart={};
+	}
+	else{
+		cart=JSON.parse(localStorage.getItem('cart'));
+		document.getElementById('cart').innerHTML = Object.keys(cart).length;
+	}
+	$('.cart').click(function() {
+        alert("hhh");
+		var idStr = this.id.toString();
+
+		if(cart[idStr] != undefined){
+		cart[idStr] = cart[idStr] + 1;
+		}
+
+        else{
+    cart[idStr] = 1;
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    document.getElementById('cart').innerHTML = Object.keys(cart).length;
+
+	});
+	$('#popCart').popover();
+	document.getElementById('popCart').setAttribute('data-content', '<h5>Cart</h5>');
+</script>
+{% endblock %}

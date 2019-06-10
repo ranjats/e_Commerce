@@ -1,0 +1,65 @@
+{% extends 'shopping/basic.html' %}
+
+
+{% block title%} Contact {% endblock %}
+{% block body %}
+<div class="container my-4">
+    <h2>  Contact US! </h2>
+    <form action="/shop/contact" method="post">{% csrf_token %}
+    <div class="row ">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="name"> Name </label>
+               <input type="text"  class="form-control" id="name" name="name" placeholder="Enter Your Name">
+            </div>
+            <div class="form-group">
+                <label for="email"> Email </label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your Ph No">
+            </div>
+            <div class="form-group">
+                <label for="desc">Write Query</label>
+                <textarea class="form-control" id="desc" name="desc" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <input class="btn btn-primary" type="submit" value="Submit">
+            </div>
+        </div>
+    </div>
+        </form>
+</div>
+{% endblock %}
+
+{% block js %}
+
+<script >
+	if (localStorage.getItem('cart') == null) {
+		var cart={};
+	}
+	else{
+		cart=JSON.parse(localStorage.getItem('cart'));
+		document.getElementById('cart').innerHTML = Object.keys(cart).length;
+	}
+	$('.cart').click(function() {
+        alert("hhh");
+		var idStr = this.id.toString();
+
+		if(cart[idStr] != undefined){
+		cart[idStr] = cart[idStr] + 1;
+		}
+
+        else{
+    cart[idStr] = 1;
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    document.getElementById('cart').innerHTML = Object.keys(cart).length;
+
+	});
+	$('#popCart').popover();
+	document.getElementById('popCart').setAttribute('data-content', '<h5>Cart</h5>');
+</script>
+{% endblock %}
